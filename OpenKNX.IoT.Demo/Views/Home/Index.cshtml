@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "Gerät";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">OpenKNX.IoT.Demo</h1>
+        <p>Learn more about <a href="https://github.com/OpenKNX/OpenKNX.IoT-CSharp">OpenKNX.IoT C# Demo</a>.</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Geräteinfo
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Serialnumber</th>
+                                <td>@ViewData["serial"]</td>
+                            </tr>
+                            <tr>
+                                <th>Indiviual Adresse</th>
+                                <td>@ViewData["physical_address"]</td>
+                            </tr>
+                            <tr>
+                                <th>Installation ID</th>
+                                <td>@ViewData["installation_id"]</td>
+                            </tr>
+                            <tr>
+                                <th>Hostname</th>
+                                <td>@ViewData["host"]</td>
+                            </tr>
+                            <tr>
+                                <th>LoadStateMachine</th>
+                                <td>@ViewData["lsm"]</td>
+                            </tr>
+                            <tr>
+                                <th>Prog-Mode</th>
+                                <td>
+                                    @if ((bool?)ViewData["progmode"] == true)
+                                    {
+                                        <span class="badge bg-danger">Active</span>
+                                    } else
+                                    {
+                                        <span class="badge bg-info">Inactive</span>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="@ViewData["qr-code-url"]" alt="QR Code" class="img-fluid mb-3" style="height: 200px; object-fit: contain;">
+                    <input type="text" class="form-control" value="@ViewData["qr-code-plain"]" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            Actuators
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6" data-actuator="0">
+                    <h5>Kanal 1</h5>
+                    <p>Status: <span class="badge bg-danger">Inactive</span></p>
+                </div>
+                <div class="col-md-6" data-actuator="1">
+                    <h5>Kanal 2</h5>
+                    <p>Status: <span class="badge bg-danger">Inactive</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-warning text-white">
+            Switches
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6" data-href="">
+                    <h5>Channel 1</h5>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="sensor1Switch">
+                        <label class="form-check-label" for="sensor1Switch">Switch</label>
+                    </div>
+                    <p>Status: <span class="badge bg-danger">Off</span></p>
+                </div>
+                <div class="col-md-6" data-href="">
+                    <h5>Channel 2</h5>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="sensor2Switch">
+                        <label class="form-check-label" for="sensor2Switch">Switch</label>
+                    </div>
+                    <p>Status: <span class="badge bg-danger">Off</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var socket = new WebSocket((window.location.protocol == "https:" ? "wss://" : "ws://") + window.location.host + "/Home/Websocket");
+
+        socket.onopen = function(event) {
+            console.log("Verbindung erfolgreich hergestellt.");
+        };
+
+        // Event: Nachricht empfangen
+        socket.onmessage = function(event) {
+            let messageType = event.data.split("=")[0];
+            let messageData = JSON.parse(event.data.split("=")[1]);
+            
+            console.log("Nachricht empfangen: ", messageType, messageData);
+
+            switch (messageType) {
+                case "data":
+                    handleGroupMessage(messageData);
+                    break;
+                // Weitere Nachrichtentypen hier behandeln
+                default:
+                    console.warn("Unbekannter Nachrichtentyp: ", messageType);
+            }
+        };
+
+        // Event: Fehler bei der Verbindung
+        socket.onerror = function(event) {
+            console.error("WebSocket-Fehler aufgetreten.", event);
+        };
+
+        // Optional: Verbindung geschlossen
+        socket.onclose = function(event) {
+            console.log("Verbindung geschlossen.", event);
+        };
+
+        function handleGroupMessage(message) {
+            console.log("Group Message Received: ", message);
+            console.log("got " + message.type);
+            var ele = $("[data-" + message.type + "='" + message.channel + "']")[0];
+            console.log(ele);
+
+            if(message.type == "actuator")
+            {
+                var span = $("p span", ele);
+                console.log(span);
+                if(message.state)
+                {
+                    $(span).removeClass("bg-danger").addClass("bg-success").text("Active");
+                } else {
+                    $(span).removeClass("bg-success").addClass("bg-danger").text("Inactive");
+                }
+            } else {
+                console.log("not supported type");
+            }
+        }
+    </script>
+}

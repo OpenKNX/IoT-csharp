@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.IoT", "OpenKNX.IoT\OpenKNX.IoT.csproj", "{B25AA6E3-9620-3E22-DC66-6F0F3B8B541F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.IoT.Demo", "OpenKNX.IoT.Demo\OpenKNX.IoT.Demo.csproj", "{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.CoAP", "OpenKNX.CoAP\OpenKNX.CoAP\OpenKNX.CoAP.csproj", "{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B25AA6E3-9620-3E22-DC66-6F0F3B8B541F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25AA6E3-9620-3E22-DC66-6F0F3B8B541F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25AA6E3-9620-3E22-DC66-6F0F3B8B541F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25AA6E3-9620-3E22-DC66-6F0F3B8B541F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5B8C612-0B89-4C85-8A19-D47511298E04}
+	EndGlobalSection
+EndGlobal

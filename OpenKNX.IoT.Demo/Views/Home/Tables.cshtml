@@ -1,0 +1,149 @@
+﻿@using OpenKNX.IoT.Models;
+@{
+    ViewData["Title"] = "Tables";
+}
+
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            GroupObjectTable
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Url</th>
+                        <th>CFlags</th>
+                        <th>GroupAdresses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in (List<GenericInternalInfo>)ViewData["groupobjects"])
+                    {
+                        <tr>
+                            <td>@entry.Id</td>
+                            <td>@entry.Info1</td>
+                            <td>@entry.Info2</td>
+                            <td>@string.Join(", ", entry.InfoList)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            Publisher Table
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Url</th>
+                        <th>GroupAdresses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in (List<GenericInternalInfo>)ViewData["publisher"])
+                    {
+                        <tr>
+                            <td>@entry.Id</td>
+                            <td>@entry.Info1</td>
+                            <td>@string.Join(", ", entry.InfoList)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            Recipient Table
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Url</th>
+                        <th>GroupAdresses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in (List<GenericInternalInfo>)ViewData["recipient"])
+                    {
+                        <tr>
+                            <td>@entry.Id</td>
+                            <td>@entry.Info1</td>
+                            <td>@string.Join(", ", entry.InfoList)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            Authentication Table
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>KeyId</th>
+                        <th>KeyIdContext</th>
+                        <th>MasterSecret</th>
+                        <th>Profile</th>
+                        <th>GroupAdresses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in (List<GenericInternalInfo>)ViewData["auth"])
+                    {
+                        <tr>
+                            <td>@entry.Id</td>
+                            <td>@entry.Info1</td>
+                            <td>@entry.Info2</td>
+                            <td>@entry.Info3</td>
+                            <td>@entry.Info4</td>
+                            <td>@string.Join(", ", entry.InfoList)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            Parameter Table
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>ByteValue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var entry in (List<GenericInternalInfo>)ViewData["parameter"])
+                    {
+                        <tr>
+                            <td>@entry.Id</td>
+                            <td>@entry.Info1</td>
+                            <td>@entry.Info2</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
