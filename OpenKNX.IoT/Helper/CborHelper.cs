@@ -324,5 +324,103 @@ namespace OpenKNX.IoT.Helper
                     throw new Exception("Unsupported type " + instance.GetType().FullName);
             }
         }
+
+        internal static byte[] ReturnTextString(string value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteTextString(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnByteString(string value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteByteString(Convert.FromHexString(value));
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnUnsignedInteger(uint value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteUInt32(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnUnsignedBigInteger(ulong value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteUInt64(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnInteger(int value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteInt32(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnBigInteger(long value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteInt64(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnByteArray(string value, int key = 1)
+        {
+            byte[] data = Convert.FromHexString(value);
+
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteStartArray(data.Length);
+            for (int i = 0; i < data.Length; i++)
+                writer.WriteInt32(data[i]);
+            writer.WriteEndArray();
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnUintArray(uint[] value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteStartArray(value.Length);
+            for (int i = 0; i < value.Length; i++)
+                writer.WriteUInt32(value[i]);
+            writer.WriteEndArray();
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
+
+        internal static byte[] ReturnBool(bool value, int key = 1)
+        {
+            CborWriter writer = new CborWriter();
+            writer.WriteStartMap(1);
+            writer.WriteInt32(key);
+            writer.WriteBoolean(value);
+            writer.WriteEndMap();
+            return writer.Encode();
+        }
     }
 }

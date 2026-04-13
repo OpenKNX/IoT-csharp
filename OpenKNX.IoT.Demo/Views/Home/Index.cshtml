@@ -84,7 +84,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6" data-href="">
+                <div class="col-md-6" data-switch="0">
                     <h5>Channel 1</h5>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="sensor1Switch">
@@ -92,7 +92,7 @@
                     </div>
                     <p>Status: <span class="badge bg-danger">Off</span></p>
                 </div>
-                <div class="col-md-6" data-href="">
+                <div class="col-md-6" data-switch="1">
                     <h5>Channel 2</h5>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="sensor2Switch">
@@ -139,6 +139,13 @@
         socket.onclose = function(event) {
             console.log("Verbindung geschlossen.", event);
         };
+
+        $("[data-switch] input").change(function() {
+            var channel = $(this).parent().parent().data("switch");
+            var state = $(this).is(":checked");
+            console.log("Switch " + channel + " changed to " + state);
+            socket.send("data=" + JSON.stringify({ type: "switch", channel: channel, state: state }));
+        });
 
         function handleGroupMessage(message) {
             console.log("Group Message Received: ", message);

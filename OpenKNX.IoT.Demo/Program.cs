@@ -27,6 +27,8 @@ builder.Services.AddSingleton<LogicHandler>(provider =>
     var websocket = provider.GetRequiredService<WebsocketHandler>();
     var logic = new LogicHandler(websocket, device);
     websocket.SetLogicHandler(logic);
+    var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+    websocket.SetLogger(loggerFactory);
     return logic;
 });
 

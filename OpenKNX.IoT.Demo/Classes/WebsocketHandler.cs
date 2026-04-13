@@ -11,10 +11,16 @@ namespace OpenKNX.IoT.Demo.Classes
         public List<WebSocket> ConnectedSockets { get; } = new List<WebSocket>();
 
         private LogicHandler? _logicHandler;
+        private ILogger? _logger;
 
         public void SetLogicHandler(LogicHandler logicHandler)
         {
             _logicHandler = logicHandler;
+        }
+
+        public void SetLogger(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<WebsocketHandler>();
         }
 
         public async Task HandleWebSocket(WebSocket socket)
@@ -36,52 +42,51 @@ namespace OpenKNX.IoT.Demo.Classes
                         if (result.MessageType == WebSocketMessageType.Text)
                         {
                             var message = System.Text.Encoding.UTF8.GetString(buffer, 0, result.Count);
-                            Console.WriteLine($"Received message: {message}");
+                            var parts = message.Split("=");
+                            _logger?.LogInformation($"Received message: {parts[0]}");
+                            if (parts[0] != "data")
+                            {
+                                _logger?.LogError("Unknown message type: " + parts[0]);
+                                return;
+                            }
                             try
                             {
-                                JsonDocument json = JsonDocument.Parse(message);
+                                JsonDocument json = JsonDocument.Parse(parts[1]);
                                 string type = json.RootElement.GetProperty("type").GetString() ?? "error";
-                                await HandleMessage(type, json.RootElement.ToString());
+                                await HandleMessage(type, json);
                             } catch (Exception ex)
                             {
-                                Console.WriteLine($"JSON error: {ex.Message}");
+                                _logger?.LogError($"JSON error: {ex.Message}");
                             }
                         }
                     }
                 }
                 catch (WebSocketException ex)
                 {
-                    Console.WriteLine($"WebSocket 1 error: {ex.Message}");
+                    _logger?.LogError(ex, $"WebSocket 1 error: {ex.Message}");
                     ConnectedSockets.Remove(socket);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"WebSocket 2 error: {ex.Message}");
+                    _logger?.LogError(ex, $"WebSocket 2 error: {ex.Message}");
                 }
             }
         }
 
-        private async Task HandleMessage(string type, string message)
+        private async Task HandleMessage(string type, JsonDocument json)
         {
-            //switch (type)
-            //{
-            //    case "get_interfaces":
-            //        InterfaceHandler.Instance.SendConnections();
-            //        break;
+            switch (type)
+            {
+                case "switch":
+                    int channel = json.RootElement.GetProperty("channel").GetInt32();
+                    bool state = json.RootElement.GetProperty("state").GetBoolean();
+                    _logicHandler?.SetChannelState(channel, state);
+                    break;
 
-            //    case "get_downloads":
-            //        DownloadHandler.Instance.SendDownloads();
-            //        break;
-
-            //    case "memory_download":
-            //        MemoryDownload data = JsonSerializer.Deserialize<MemoryDownload>(message) ?? throw new Exception("Could not deserialize MemoryDownload");
-            //        DownloadHandler.Instance.AddDownload(data);
-            //        break;
-
-            //    default:
-            //        Debug.WriteLine("Unknown Message Type: " + type);
-            //        break;
-            //}
+                default:
+                    _logger?.LogError("Unknown Message Type: " + type);
+                    break;
+            }
         }
 
         public async Task SendBroadcast(string message)

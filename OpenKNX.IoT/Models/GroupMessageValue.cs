@@ -13,5 +13,14 @@ namespace OpenKNX.IoT.Models
         public string ServiceTypeCode { get; set; } = string.Empty;
         [CborKey(1)]
         public object Value { get; set; } = 0;
+
+        public GroupMessageValue() { }
+
+        public GroupMessageValue(uint groupAddress, string serviceTypeCode, object value)
+        {
+            GroupAddress = groupAddress;
+            ServiceTypeCode = serviceTypeCode;
+            Value = value;
+        }
     }
 }

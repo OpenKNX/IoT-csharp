@@ -16,7 +16,7 @@ namespace OpenKNX.IoT.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
 
-            modelBuilder.Entity("OpenKNX.IoT.Resources.ResourceData", b =>
+            modelBuilder.Entity("OpenKNX.IoT.Models.ResourceData", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -28,6 +28,9 @@ namespace OpenKNX.IoT.Migrations
                     b.Property<byte[]>("Default")
                         .IsRequired()
                         .HasColumnType("BLOB");
+
+                    b.PrimitiveCollection<string>("EraseCodes")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ResourceType")
                         .HasColumnType("INTEGER");

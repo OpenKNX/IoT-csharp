@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace OpenKNX.IoT.Models
+namespace OpenKNX.IoT.Database
 {
     internal class ResourceData
     {
@@ -13,5 +13,6 @@ namespace OpenKNX.IoT.Models
         public byte[] Data { get; set; } = Array.Empty<byte>();
         public byte[] Default { get; set; } = Array.Empty<byte>();
         public ResourceTypes ResourceType { get; set; }
+        public int[]? EraseCodes { get; set; } = null;
     }
 }

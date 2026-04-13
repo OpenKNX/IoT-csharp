@@ -21,15 +21,5 @@ namespace OpenKNX.IoT.Models
         {
             return SecureInfo == null && Scope == null && Profile == null;
         }
-
-        public void Update(AuthenticationToken newToken)
-        {
-            if (newToken.SecureInfo != null)
-                SecureInfo = newToken.SecureInfo;
-            if (newToken.Scope != null)
-                Scope = newToken.Scope;
-            if (newToken.Profile != null)
-                Profile = newToken.Profile;
-        }
     }
 }

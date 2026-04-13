@@ -12,6 +12,21 @@
             _device.GroupMessageReceived += _device_GroupMessageReceived;
         }
 
+        public void SetChannelState(int channel, bool state)
+        {
+            switch(channel)
+            {
+                case 0:
+                    _channel0State = state;
+                    _device.SendGroupMessage("/p/lssb/0/soo", state);
+                    break;
+                case 1:
+                    _channel1State = state;
+                    _device.SendGroupMessage("/p/lssb/1/soo", state);
+                    break;
+            }
+        }
+
         private bool _channel0State = false;
         private bool _channel1State = false;
 

@@ -1,0 +1,3 @@
+[submodule "CoAP-CSharp"]
+	path = CoAP-CSharp
+	url = git@github.com:thewhobox/CoAP-CSharp.git

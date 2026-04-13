@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.IoT", "OpenKNX.IoT\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.IoT.Demo", "OpenKNX.IoT.Demo\OpenKNX.IoT.Demo.csproj", "{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenKNX.CoAP", "OpenKNX.CoAP\OpenKNX.CoAP\OpenKNX.CoAP.csproj", "{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoAP.Std10", "..\CoAP-CSharp\CoAP.NET\CoAP.Std10.csproj", "{F5C9CD4D-C1B4-3A7B-961B-A0A7768467BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BC24F46-3391-4EBA-93F5-C7ADEB31C5F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{060EF29D-A2F3-A1ED-E02C-10A71BD45C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C9CD4D-C1B4-3A7B-961B-A0A7768467BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C9CD4D-C1B4-3A7B-961B-A0A7768467BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C9CD4D-C1B4-3A7B-961B-A0A7768467BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C9CD4D-C1B4-3A7B-961B-A0A7768467BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

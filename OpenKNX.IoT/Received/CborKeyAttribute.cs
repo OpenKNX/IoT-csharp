@@ -1,5 +1,4 @@
-﻿using OpenKNX.CoAP.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
